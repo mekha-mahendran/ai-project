@@ -74,22 +74,30 @@ export function Sidebar() {
         </p>
 
         {navigation.map((item) => {
-          const Icon = item.icon;
+  const Icon = item.icon;
 
-          return (
-            <button
-              key={item.label}
-              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
-                item.active
-                  ? "bg-muted font-medium text-foreground"
-                  : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
-              }`}
-            >
-              <Icon className="h-4 w-4" />
-              <span>{item.label}</span>
-            </button>
-          );
-        })}
+  const href =
+    item.label === "Clients"
+      ? "/clients"
+      : item.label === "Overview"
+        ? "/"
+        : "#";
+
+  return (
+    <a
+      key={item.label}
+      href={href}
+      className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
+        item.active
+          ? "bg-muted font-medium text-foreground"
+          : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+      }`}
+    >
+      <Icon className="h-4 w-4" />
+      <span>{item.label}</span>
+    </a>
+  );
+})}
 
         <div className="pt-6">
           <p className="mb-3 px-3 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
