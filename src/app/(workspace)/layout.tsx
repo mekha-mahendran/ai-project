@@ -1,11 +1,13 @@
 import { Header } from "@/components/dashboard/header";
 import { Sidebar } from "@/components/dashboard/sidebar";
+import { requireUser } from "@/lib/auth";
 
-export default function DashboardLayout({
+export default async function WorkspaceLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await requireUser();
   return (
     <div className="flex min-h-screen">
       <Sidebar />

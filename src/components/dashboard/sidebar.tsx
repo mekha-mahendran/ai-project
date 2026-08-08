@@ -13,6 +13,8 @@ import {
   Users,
 } from "lucide-react";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 
@@ -20,39 +22,48 @@ const navigation = [
   {
     label: "Overview",
     icon: LayoutDashboard,
-    active: true,
+    href: "/dashboard",
   },
   {
     label: "Clients",
     icon: Users,
+    href: "/clients",
   },
   {
     label: "Projects",
     icon: FolderKanban,
+    href: "/projects",
   },
   {
     label: "Tasks",
     icon: CheckSquare,
+    href: "/tasks",
   },
   {
     label: "Invoices",
     icon: Receipt,
+    href: "/deliverables",
   },
   {
     label: "AI Workspace",
     icon: Sparkles,
+    href: "/ai-workspace",
   },
   {
     label: "Documents",
     icon: FileText,
+    href: "/deliverables",
   },
   {
     label: "Analytics",
     icon: BarChart3,
+    href: "/analytics",
   },
 ];
 
 export function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <aside className="hidden h-screen w-64 shrink-0 flex-col border-r bg-background md:flex">
       <div className="flex h-16 items-center gap-3 px-6">
@@ -74,34 +85,24 @@ export function Sidebar() {
         </p>
 
         {navigation.map((item) => {
-  const Icon = item.icon;
+          const Icon = item.icon;
+          const isActive = pathname === item.href;
 
-  const href =
-  item.label === "Clients"
-    ? "/clients"
-    : item.label === "Projects"
-      ? "/projects"
-      : item.label === "Tasks"
-        ? "/tasks"
-        : item.label === "Overview"
-          ? "/"
-          : "#";
-
-  return (
-    <a
-      key={item.label}
-      href={href}
-      className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
-        item.active
-          ? "bg-muted font-medium text-foreground"
-          : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
-      }`}
-    >
-      <Icon className="h-4 w-4" />
-      <span>{item.label}</span>
-    </a>
-  );
-})}
+          return (
+            <Link
+              key={item.label}
+              href={item.href}
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
+                isActive
+                  ? "bg-muted font-medium text-foreground"
+                  : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+              }`}
+            >
+              <Icon className="h-4 w-4" />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
 
         <div className="pt-6">
           <p className="mb-3 px-3 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
