@@ -81,9 +81,11 @@ export function Sidebar() {
     ? "/clients"
     : item.label === "Projects"
       ? "/projects"
-      : item.label === "Overview"
-        ? "/"
-        : "#";
+      : item.label === "Tasks"
+        ? "/tasks"
+        : item.label === "Overview"
+          ? "/"
+          : "#";
 
   return (
     <a
