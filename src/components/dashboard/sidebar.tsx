@@ -77,8 +77,10 @@ export function Sidebar() {
   const Icon = item.icon;
 
   const href =
-    item.label === "Clients"
-      ? "/clients"
+  item.label === "Clients"
+    ? "/clients"
+    : item.label === "Projects"
+      ? "/projects"
       : item.label === "Overview"
         ? "/"
         : "#";
